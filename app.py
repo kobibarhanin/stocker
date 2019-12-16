@@ -2,9 +2,11 @@ from flask import Flask, render_template, jsonify, request
 import random
 import string
 from api import get_stock_value
+import threading
+
 
 app = Flask(__name__)
-
+stock_name = 'Microsoft'
 
 @app.route('/')
 def stocks_view_landing():
@@ -15,7 +17,7 @@ def stocks_view_landing():
 def net_view_main():
     print('* Scanning network')
     stocks = [{
-        'name': 'Microsoft',
+        'name': stock_name,
         'symbol': 'MSFT',
         'value': get_stock_value('MSFT')
     }]
@@ -23,5 +25,12 @@ def net_view_main():
     return jsonify(stocks)
 
 
+def collect_stock_data(stock_name):
+    print('test')
+    # with open('test.data','a') as td:
+    #     td.write(stock_name)
+
+
 if __name__ == '__main__':
+    threading.Thread(target=collect_stock_data, args=(stock_name,)).start()
     app.run(host='0.0.0.0')
