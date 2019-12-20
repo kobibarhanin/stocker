@@ -39,7 +39,7 @@ def status():
     print('==================================')
     print('Transactions:')
     print('==================================')
-    transactions = transactions_coll.find()
+    transactions = list(transactions_coll.find())
     idx = -15
     if len(transactions) < 15:
         idx = 0 - len(transactions)

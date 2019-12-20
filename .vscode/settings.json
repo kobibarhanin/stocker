@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "venv/bin/python3",
-    "appService.defaultWebAppToDeploy": "/subscriptions/98439428-51a8-499a-aa3b-6ba658e28483/resourceGroups/stocker_rg/providers/Microsoft.Web/sites/stocker01",
-    "appService.deploySubpath": ""
-}
