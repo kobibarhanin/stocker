@@ -32,7 +32,7 @@ def status():
     print('Assets status:')
     print('==================================')
     funds = settings_coll.find_one({'name': 'funds'})
-    value = settings_coll.find_one({'name': 'funds'})
+    value = settings_coll.find_one({'name': 'value'})
     print(f'Funds: {funds["total"]}')
     print(f'Value: {value["total"]}')
 
