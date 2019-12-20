@@ -142,7 +142,7 @@ if __name__ == '__main__':
     value = funds
     for stock in stocks:
         stocks_coll.update({'symbol': stock.symbol}, {'$set': {'amount': stock.amount}})
-        value += funds + stock.amount * stock.last_price
+        value += stock.amount * stock.last_price
 
     settings_coll.update({'name': 'funds'}, {'$set': {'total': funds}})
     settings_coll.update({'name': 'value'}, {'$set': {'total': value}})
