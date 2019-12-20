@@ -1,0 +1,5 @@
+venv/
+__*
+.vscode/
+archive/
+.idea/
