@@ -45,6 +45,9 @@ class Stock:
 
         total = 0
         prices = []
+
+        calc_keys = calc_keys[0:len(calc_keys)//2]
+
         for key in calc_keys:
             total += float(self.data_set[key]['4. close'])
             prices.append(float(self.data_set[key]['4. close']))
@@ -64,11 +67,11 @@ class Stock:
         self.pred_growth = avg * self.growth
 
         # - sell when in peak
-        self.sell_point = avg + self.pred_growth
+        self.sell_point = avg + self.pred_growth * 0.7
         # self.sell_point = self.sell_point * 1.02
 
         # - buy when in low
-        self.buy_point = self.min_price + self.pred_growth
+        self.buy_point = self.min_price + self.pred_growth * 1.2
         # self.buy_point = self.buy_point * 0.98
 
         self.aptitude = 0
@@ -117,7 +120,7 @@ if __name__ == '__main__':
         price = float(stock.last_price)
 
         if stock.is_a_sell(price) and stock.amount > 0:
-            transaction = 'selling {stock.symbol} at price = {price}, with stocks = {stock.amount}'
+            transaction = f'selling {stock.symbol} at price = {price}, with stocks = {stock.amount}'
             transactions_coll.insert_one({'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),'transaction':transaction})
             print(transaction)
 
@@ -137,7 +140,7 @@ if __name__ == '__main__':
                 print(f' - after buy: funds = {funds}, stocks = {stock.amount}')
             else:
                 transaction = f'No buy of {stock.symbol} - LACK OF FUNDS - at {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'
-                transactions_coll.insert_one({'time':datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),'transaction':transaction})
+#                transactions_coll.insert_one({'time':datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),'transaction':transaction})
 
     value = funds
     for stock in stocks:
